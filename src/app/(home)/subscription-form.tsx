@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { subscribeToEvent } from "@/https/api";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from 'react'
 
 const subscriptionSchema = z.object({
   name: z.string().min(2, 'Digite seu nome completo'),
@@ -16,8 +17,15 @@ const subscriptionSchema = z.object({
 
 type SubscriptionSchema = z.infer<typeof subscriptionSchema>
 
-export function SubscriptionForm() {
+export function SubscriptionFormWrapper() {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <SubscriptionForm />
+    </Suspense>
+  )
+}
 
+export function SubscriptionForm() {
     const router = useRouter()
     const searchParams =useSearchParams()
 
