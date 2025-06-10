@@ -17,15 +17,15 @@ const subscriptionSchema = z.object({
 
 type SubscriptionSchema = z.infer<typeof subscriptionSchema>
 
-export function SubscriptionFormWrapper() {
+export function SubscriptionForm() {
   return (
-    <Suspense fallback={<div>Carregando...</div>}>
-      <SubscriptionForm />
+    <Suspense fallback={<div>Carregando formulário...</div>}>
+      <SubscriptionFormContent />
     </Suspense>
   )
 }
 
-export function SubscriptionForm() {
+function SubscriptionFormContent() {
     const router = useRouter()
     const searchParams =useSearchParams()
 
